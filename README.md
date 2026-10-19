@@ -141,12 +141,14 @@ And the following methods:
  * Class LineSegment.
  */
 class LineSegment {
+	private Point p1;
+	private Point p2;
 
 	/**
 	 * Constructor.
 	 */
 	public LineSegment(Point p1, Point p2) {
-		// ...
+		p1
 	}
 
 	/**

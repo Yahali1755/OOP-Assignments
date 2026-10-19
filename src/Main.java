@@ -1,7 +1,8 @@
 /**
  * Main.
  *
- * @author [Author Name]
+ * @author Yahali Mashiach
+ * ID: 214007346
  * © [YYYY]
  */
 public class Main {
