@@ -1,10 +1,14 @@
 /**
  * Vector.
  *
- * @author [Author Name]
- * © [YYYY]
+ * @author Yahali Mashiach
+ * ID: 214007346
  */
 public class Vector {
+    /** attributes. */
+    private double x;
+    private double y;
+
     /**
      * Constructor.
      *
@@ -12,6 +16,8 @@ public class Vector {
      * @param y coordinate y
      */
     public Vector(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -21,7 +27,8 @@ public class Vector {
      * @param end non-null endpoint; its coordinates are the vector components
      */
     public Vector(Point end) {
-        // TODO: Implement the constructor described in README Part 2.
+        this.x = end.getX();
+        this.y = end.getY();
     }
 
     /**
@@ -32,7 +39,8 @@ public class Vector {
      * @param end non-null end point
      */
     public Vector(Point start, Point end) {
-        // TODO: Implement the constructor described in README Part 2.
+        this.y = end.getY() - start.getY();
+        this.x = end.getX() - start.getX();
     }
 
     /**
@@ -42,7 +50,8 @@ public class Vector {
      * @param line non-null directed line segment
      */
     public Vector(DirectedLineSegment line) {
-        // TODO: Implement the constructor described in README Part 2.
+        this.x = line.getEnd().getX() - line.getStart().getX();
+        this.y = line.getEnd().getY() - line.getStart().getY();
     }
 
     /**
@@ -51,7 +60,7 @@ public class Vector {
      * @return coordinate x
      */
     public double getX() {
-        return 0;
+        return this.x;
     }
 
     /**
@@ -60,7 +69,7 @@ public class Vector {
      * @return coordinate y
      */
     public double getY() {
-        return 0;
+        return this.y;
     }
 
     /**
@@ -69,7 +78,7 @@ public class Vector {
      * @return length
      */
     public double getLength() {
-        return 0;
+        return Math.hypot(this.x, this.y);
     }
 
     /**
@@ -79,7 +88,7 @@ public class Vector {
      * @return direction
      */
     public double getDirection() {
-        return 0;
+        return Math.atan2(this.y, this.x);
     }
 
     /**
@@ -88,6 +97,7 @@ public class Vector {
      * @param x coordinate x
      */
     public void setX(double x) {
+        this.x = x;
     }
 
     /**
@@ -96,6 +106,7 @@ public class Vector {
      * @param y coordinate y
      */
     public void setY(double y) {
+        this.y = y;
     }
 
     /**
@@ -104,6 +115,13 @@ public class Vector {
      * @param length length
      */
     public void setLength(double length) {
+        double currentLength = this.getLength();
+
+        // if original length is 0, length can't be set, so no change
+        if (currentLength != 0) {
+            this.x = (length * this.x) / currentLength;
+            this.y = (length * this.y) / currentLength;
+        }
     }
 
     /**
@@ -112,6 +130,15 @@ public class Vector {
      * @param direction direction (angle in radians)
      */
     public void setDirection(double direction) {
+        double length = this.getLength();
+
+        // if length is 0, the direction is undefined, so no change
+        if (length != 0) {
+            // cos(direction) is the x-coordinate of  vector in the direction of the angle in radians
+            this.x = length * Math.cos(direction);
+            // sin(direction) is the y-coordinate of  vector in the direction of the angle in radians
+            this.y = length * Math.sin(direction);
+        }
     }
 
     /**
@@ -120,7 +147,7 @@ public class Vector {
      * @return point
      */
     public Point coordinates() {
-        return null;
+        return new Point(this.x, this.y);
     }
 
     /**
@@ -130,7 +157,8 @@ public class Vector {
      * @return `true` if `this` and `other` are the same vector mathematically, `false` otherwise.
      */
     public boolean isEqual(Vector other) {
-        return false;
+        return DoubleUtils.isEqual(this.x, other.getX())
+            && DoubleUtils.isEqual(this.y, other.getY());
     }
 
     /**
@@ -140,7 +168,7 @@ public class Vector {
      * @return vector sum
      */
     public Vector add(Vector other) {
-        return null;
+        return new Vector(this.x + other.x, this.y + other.y);
     }
 
     /**
@@ -151,7 +179,7 @@ public class Vector {
      * @return vector sum
      */
     public static Vector sum(Vector first, Vector second) {
-        return null;
+        return new Vector(first.x + second.x, first.y + second.y);
     }
 
     /**
@@ -161,7 +189,7 @@ public class Vector {
      * @return scaled vector
      */
     public Vector scale(double scalar) {
-        return null;
+        return new Vector(this.x * scalar, this.y * scalar);
     }
 
     /**
@@ -172,7 +200,7 @@ public class Vector {
      * @return cross product `this` X `other`
      */
     public double crossProduct(Vector other) {
-        return 0;
+        return this.x * other.y - this.y * other.x;
     }
 
     /**
@@ -182,6 +210,6 @@ public class Vector {
      * @return dot product `this` . `other`
      */
     public double dotProduct(Vector other) {
-        return 0;
+        return this.x * other.x + this.y * other.y;
     }
 }
