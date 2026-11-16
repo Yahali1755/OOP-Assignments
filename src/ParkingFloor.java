@@ -1,12 +1,18 @@
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * ParkingFloor.
  *
- * @author [Author Name]
- * © [YYYY]
+ * @author Yahali Mashiach
+ * ID: 214007346
  */
 public class ParkingFloor {
+    /**
+     * attributes.
+     */
+    private int floorNumber;
+    private ArrayList<ParkingSpot> spots;
 
     /**
      * Construct a ParkingFloor with the given floor number.
@@ -15,6 +21,8 @@ public class ParkingFloor {
      * @param floorNumber floor number
      */
     public ParkingFloor(int floorNumber) {
+        this.floorNumber = floorNumber;
+        this.spots = new ArrayList<>();
     }
 
     /**
@@ -23,7 +31,7 @@ public class ParkingFloor {
      * @return floor number
      */
     public int getFloorNumber() {
-        return 0;
+        return this.floorNumber;
     }
 
     /**
@@ -32,7 +40,7 @@ public class ParkingFloor {
      * @return collection of parking spots
      */
     public Collection<ParkingSpot> getSpots() {
-        return null;
+        return this.spots;
     }
 
     /**
@@ -41,5 +49,6 @@ public class ParkingFloor {
      * @param spot parking spot to add
      */
     public void addSpot(ParkingSpot spot) {
+        this.spots.add(spot);
     }
 }
